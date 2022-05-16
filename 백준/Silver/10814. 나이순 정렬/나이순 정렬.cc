@@ -6,28 +6,44 @@
 using namespace std;
 
 
-bool compare(pair<int,string> a, pair<int,string> b){
-    return a.first<b.first;
-}
 
-int main() {
+int main(){
     int N;
     cin >> N;
+    vector<tuple<int,int,string>> p;
 
-    pair <int,string> tmp;
-    vector<pair<int,string>> p;
-    for (int i = 0; i < N; i++) {
-        cin >> tmp.first >> tmp.second;
-        p.push_back(tmp);
+    for(int i =0 ; i< N; i++){
+        int age;
+        string name;
+        cin >> age;
+        cin >> name;
+        p.push_back({age,i,name});
     }
-    stable_sort(p.begin(), p.end(),compare);
+    sort(p.begin(),p.end());
 
 
-    for (auto i: p) {
-        cout << i.first <<" "<<i.second <<'\n';
-
+    for(auto i : p ){
+        cout << get<0>(i) << " " << get<2>(i)<<'\n';
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
-
