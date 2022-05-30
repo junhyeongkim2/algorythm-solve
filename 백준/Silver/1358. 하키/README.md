@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 2032 KB, 시간: 0 ms
+메모리: 2020 KB, 시간: 0 ms
 
 ### 분류
 
@@ -26,7 +26,7 @@
 
 <p>선수들의 위치가 주어질 때, 링크 안 또는 경계에 있는 선수가 총 몇 명인지 구하는 프로그램을 작성하시오.</p>
 
-<p style="text-align: center;"><img alt="" src=""></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/6f83923c-f223-4005-b69e-7a7a3365d51c/-/preview/"></p>
 
 ### 입력 
 
