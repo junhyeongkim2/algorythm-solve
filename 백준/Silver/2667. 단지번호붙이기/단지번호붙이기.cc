@@ -16,7 +16,6 @@ int house = 0;
 
 void DFS(int y, int x) {
     visited[y][x] = true;
-    map[y][x] = label;
     house++;
 
     for (int i = 0; i < 4; i++) {
