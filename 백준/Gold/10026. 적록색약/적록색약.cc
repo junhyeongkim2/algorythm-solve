@@ -45,10 +45,9 @@ int main() {
     for(int i=0;i<N;i++){
         for(int j = 0 ; j < N;j++){
             if(photo[i][j]=='G')photo[i][j]='R';
-            else photo[i][j] = photo[i][j];
         }
     }
-    
+
     memset(isVisited,false,sizeof(isVisited));
 
     cnt=0;
