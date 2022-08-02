@@ -23,7 +23,7 @@ void dfs(int k){
 int main(){
     cin >> N;
     
-    for(int i=0;i<N;i++){
+    for(int i=1;i<N;i++){
         int x,y;
         cin >> x >> y;
         v[x].push_back(y);
