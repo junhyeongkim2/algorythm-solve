@@ -23,6 +23,11 @@ void dfs(int start){
 }
 
 int main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     cin >> N >> M >> R;
     for(int i = 0 ; i<M;i++){
         int a, b;
