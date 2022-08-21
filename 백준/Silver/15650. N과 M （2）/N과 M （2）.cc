@@ -1,35 +1,34 @@
 #include <iostream>
-#define MAX 9
-
+#include <vector>
 using namespace std;
 
-int n,m;
-int arr[MAX];
-bool visited[MAX];
 
-void dfs(int num, int cnt){
-    
-    if(cnt == m){
-        for(int i =0 ; i < m; i++){
-            cout << arr[i] << ' ';
+int N , M;
+
+int arr[9];
+int visited[9];
+
+void dfs(int cnt,int si){
+    if(cnt > M){
+        for(int i = 1; i <= M;i++){
+            cout << arr[i] << " ";
         }
-        cout << '\n';
+        cout << "\n";
         return;
     }
-    for(int i = num ; i<=n; i++){
-        if(!visited[i]){
-            visited[cnt]=true;
-            arr[cnt]= i ;
-            dfs(i+1,cnt+1);
-            visited[cnt]=false;
+    for(int i=si;i <=N;i++){
+        if(visited[i]==0){
+            arr[cnt]=i;
+            visited[i]=1;
+            dfs(cnt+1,i);
+            visited[i]=0;
         }
     }
-    
 }
+
+
 
 int main(){
-    cin >> n >> m;
-    dfs(1,0);
+    cin >> N >> M;
+    dfs(1,1);
 }
-
-
