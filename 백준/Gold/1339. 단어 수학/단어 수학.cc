@@ -22,8 +22,7 @@ int main(){
     int cnt=9;
     
     for(int i = 0 ; i < 26;i++){
-        if(graph[i]==0)
-            break;
+      
         answer += graph[i] * cnt--;
     }
     cout << answer << "\n";
