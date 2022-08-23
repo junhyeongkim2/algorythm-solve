@@ -23,6 +23,7 @@ int main(){
         }
         std::sort(v1.begin(), v1.end());
         for (int i = 0; i <v1.size()-1 ; ++i) {
+            //cout << v1[i] << "\n";
             if(v1[i].length()>=v1[i+1].length()) continue;
             if (v1[i]== v1[i+1].substr(0,v1[i].length())){
                 flag = true;
