@@ -32,7 +32,7 @@ int main() {
 
     for (int i = n-1; i >= 0; --i) {
         r_dp[i]=1;
-        for (int j = n-1; j >= i; --j) {
+        for (int j = n-1; j > i; --j) {
             if(arr[i]>arr[j] && r_dp[i] < r_dp[j]+1){
                 r_dp[i] = r_dp[j]+1;
             }
