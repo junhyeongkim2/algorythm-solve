@@ -37,11 +37,7 @@ int main(){
             if(i==0){
                 index_v.push_back(1);
             }else{
-                if(v[idx] == a ){
-                    index_v.push_back(idx+1);
-                }else{
-                    index_v.push_back(idx+1);
-                }
+                index_v.push_back(idx+1);
             }
             v[idx] = a ;
         }
