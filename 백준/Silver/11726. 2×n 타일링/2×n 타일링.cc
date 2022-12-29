@@ -20,7 +20,7 @@ int main(){
         dp[i] = (dp[i-1]+dp[i-2])  % 10007;
     }
 
-    cout << dp[n] % 10007 <<"\n";
+    cout << dp[n] <<"\n";
 
 
 
