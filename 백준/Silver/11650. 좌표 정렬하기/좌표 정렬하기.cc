@@ -1,20 +1,31 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
+
+int n;
+vector<pair<int,int>>v1;
+
 int main(){
-    int N ;
-    cin >> N;
-    vector<vector<int>> arr(N,vector<int>(2,0));
-    for(int i=0;i<N;i++){
-        cin >> arr[i][0];
-        cin >> arr[i][1];
+
+    cin >> n;
+
+    for (int i = 0; i <n ; ++i) {
+        int a, b;
+        cin >> a >> b;
+        v1.push_back({a,b});
     }
-    sort(arr.begin(), arr.end());
-    for(int i = 0; i<arr.size();i++){
-        cout << arr[i][0] << " " << arr[i][1] << '\n';
+    std::sort(v1.begin(), v1.end());
+
+    for (int i = 0; i <n ; ++i) {
+        cout << v1[i].first << " " << v1[i].second << "\n";
+
     }
-    
+
+
 }
+
+
+
+
+
+
