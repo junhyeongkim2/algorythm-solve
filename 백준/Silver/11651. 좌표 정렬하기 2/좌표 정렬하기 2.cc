@@ -1,25 +1,43 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 
-int main(){
-    int N ;
-    cin >> N;
-    vector<vector<int>> arr(N , vector<int>(2,0));
-    for(int i =0 ;i< N ; i ++) {
-        cin >> arr[i][1];
-        cin >> arr[i][0];
+int n;
+vector<pair<int,int>>v1;
+
+bool comp(pair<int,int> a, pair<int,int> b){
+
+    if(a.second==b.second){
+
+        return a.first<b.first;
+
+    }else{
+        return a.second<b.second;
     }
-    sort(arr.begin(),arr.end());
-    for(int i=0;i<arr.size();i++ ){
-        cout<< arr[i][1] << " " << arr[i][0] << "\n";
+
+
+
+}
+
+int main(){
+
+    cin >> n;
+
+    for (int i = 0; i <n ; ++i) {
+        int a, b;
+        cin >> a >> b;
+        v1.push_back({a,b});
+    }
+    std::sort(v1.begin(), v1.end(),comp);
+
+    for (int i = 0; i <n ; ++i) {
+        cout << v1[i].first << " " << v1[i].second << "\n";
+
     }
 
 
 }
+
 
 
 
