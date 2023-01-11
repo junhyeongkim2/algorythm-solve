@@ -1,41 +1,61 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int n;
+
+
+vector<long long int> v1;
+
+map<long long int,long long int>m1;
+
 
 int main() {
 
-    int N;
-    int max = 1;
-    long long ans;
-    long long arr[100001];
-    int cnt = 1;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-    cin >> N;
+    cin >> n;
 
-    for(int i = 0; i < N; i++){
-        cin >> arr[i];
+    for (int i = 0; i < n; ++i) {
+        long long int a;
+        cin >> a;
+        v1.push_back(a);
     }
 
-    sort(arr, arr + N);
-    ans = arr[0];
-    for(int i = 1; i < N; i++){
-        if(arr[i] == arr[i-1])
-            cnt++;
-        else
-            cnt = 1;
+    std::sort(v1.begin(), v1.end(),greater<long long int>());
 
-        if(max < cnt){
-            max = cnt;
-            ans = arr[i];
+
+    long long int max1=0;
+    long long int ans =0;
+    
+    for (int i = 0; i <v1.size(); ++i) {
+        m1[v1[i]]++;
+        //cout << v1[i] << " " << m1[v1[i]] << "\n";
+
+        if(m1[v1[i]] >= max1 ){
+            max1 = m1[v1[i]];
+            ans = v1[i];
         }
+
     }
+    cout << ans <<"\n";
 
-    cout << ans << '\n';
 
-    return 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
-
-
-
-
