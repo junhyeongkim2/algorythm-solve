@@ -25,7 +25,11 @@ bool unionParent(int a, int b){
     if(a==b){
         return true;
     }else{
-        graph[a] = b;
+        if(a>b){
+            graph[a] = b;
+        }else{
+            graph[b] = a;
+        }
         return false;
     }
 
