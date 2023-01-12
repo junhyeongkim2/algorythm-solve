@@ -1,58 +1,61 @@
-#include <iostream>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
 
+int n;
 
-stack<int>s1;
+vector<int>v1;
 
-int main(){
+int main() {
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
 
+    int n ;
+    cin >> n;
 
-    int N ;
-    cin >> N;
-
-
-    for(int i = 0 ; i < N ; i ++){
+    for (int i = 0; i <n ; ++i) {
         string s;
         cin >> s;
         if(s=="push"){
-            int a=  0;
+            int a;
             cin >> a;
-            s1.push(a);
-
+            v1.push_back(a);
         }
         if(s=="pop"){
-
-            if(s1.size()>0){
-                cout << s1.top() << "\n";
-                s1.pop();
-
+            if(v1.size()==0){
+                cout << "-1" << "\n";
             }else{
-                cout << -1<<"\n";
+                int temp;
+                temp = v1.back();
+                v1.pop_back();
+                cout << temp << "\n";
             }
         }
         if(s=="size"){
-            cout << s1.size()<<"\n";
+            cout << v1.size() << "\n";
         }
         if(s=="empty"){
-            if(s1.size()==0){
-                cout << 1<<"\n";
+            if(v1.size()==0){
+                cout << "1" << "\n";
             }else{
-                cout << 0 << "\n";
+                cout << "0" << "\n";
             }
-
         }
         if(s=="top"){
-            if(s1.size()>0){
-                cout << s1.top() << "\n";
+            if(v1.size()==0){
+                cout << "-1" << "\n";
             }else{
-                cout << -1 << "\n";
+                cout << v1.back() << "\n";
             }
-
         }
-
-
     }
+
+
+
+
+
+
 
 }
