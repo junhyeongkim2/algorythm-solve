@@ -1,48 +1,45 @@
-#include <vector>
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main(){
 
-    int n,k;
+int n,k;
+
+vector<int>coin;
+
+int main() {
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     cin >> n >> k;
 
-    vector<int>money;
-
-    for(int i = 0 ; i < n; i++){
-        int coin;
-        cin >> coin;
-        money.push_back(coin);
+    for (int i = 0; i <n ; ++i) {
+        int a;
+        cin >> a;
+        coin.push_back(a);
     }
 
-    bool flag = true;
-    int answer=0;
-    int a = k;
-    int b = 0;
-    int count = n -1;
+    int point = coin.size()-1;
+    int ans =0;
 
-    while(flag==true){
-        if(money[count] <= a ){
-            b = a / money[count];
-            a = a%money[count];
-            if(a==0) {
-                answer+=b;
-
-                break;
-
-            }
-
-            answer+=b;
+    while(true){
+        //cout << k << " " << coin[point] << "\n";
+        if(k  >= coin[point]){
+            ans += k / coin[point];
+            k = k%coin[point];
         }
-        count--;
+        
+        point--;
+
+        if(k==0){
+            break;
+        }
+
+
     }
-    cout<<answer;
 
-
-
-
-
+    cout << ans;
 
 
 
