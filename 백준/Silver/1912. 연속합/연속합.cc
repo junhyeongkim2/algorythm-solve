@@ -1,25 +1,34 @@
-#include <iostream>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int N[100000];
-int dp[100000];
 
-int main(){
-    int n;
+int n;
+int dp[100001];
+
+int main() {
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     cin >> n;
-    
-    for(int i = 0 ; i < n;i++)cin >> N[i];
-    dp[0] = N[0];
-    int result = dp[0];
-    for(int i = 1; i < n ; i ++){
-        dp[i] = max(dp[i-1]+N[i],N[i]);
-        result = max(result,dp[i]);
+
+    for (int i = 0; i < n; ++i) {
+        int a;
+        cin >> a;
+        dp[i] = a;
     }
-    cout << result << endl;
-    
- 
-    
-    
+
+    int ans = dp[0];
+    for (int i = 1; i <n ; ++i) {
+        dp[i] = max(dp[i-1]+dp[i],dp[i]);
+        ans = max(dp[i],ans);
+    }
+    cout << ans << "\n";
+
+
+
+
+
+
 }
