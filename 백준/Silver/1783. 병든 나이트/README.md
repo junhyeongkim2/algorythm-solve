@@ -1,4 +1,4 @@
-# [Silver IV] 병든 나이트 - 1783 
+# [Silver III] 병든 나이트 - 1783 
 
 [문제 링크](https://www.acmicpc.net/problem/1783) 
 
