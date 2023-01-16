@@ -1,49 +1,28 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int N , M ;
-
 int main(){
 
-    cin >> N >> M;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-    if(N==1){
-        cout << 1 << endl;
+    int n,m;
+
+    cin >> n >> m;
+
+    if(n==1){
+        cout << 1;
     }
-    else if(N==2)
-
-        cout << min(4,(M+1)/2)<< endl;
-
-    else if(N>=3){
-
-        if(M<=6)
-            cout << min(4,M)<<endl;
-
-        else
-            cout << M-2 << endl;
-
+    if(n==2){
+        cout << min(4,(m-1)/2+1);
     }
-
-    return 0;
-
-
-
-
-
-    cin >> N >> M;
-
-    if(N==1){
-        cout << -1 << endl;
-    }else if(N==2){
-        cout << min(4,(M+1)/2);
-
-    }else if (N>=3){
-        if(M<=6){
-            cout << min(4,M);
-        }else{
-            cout << M-2;
+    if(n>=3){
+        if(m<7){
+            cout << min(4,m);
+        }else if (m>=7){
+            cout << 5+m-7;
         }
 
 
@@ -57,4 +36,3 @@ int main(){
 
 
 }
-
