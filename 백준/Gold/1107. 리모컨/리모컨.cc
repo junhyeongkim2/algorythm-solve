@@ -23,7 +23,7 @@ int main(){
     vector<int>sizevec;
 
 
-    int minimum= abs(n-100);\
+    int minimum= abs(n-100);
 
     if(n!=100){
         for (int i = 0; i <1000001 ; ++i) {
