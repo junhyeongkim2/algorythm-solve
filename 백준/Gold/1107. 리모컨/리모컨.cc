@@ -28,18 +28,15 @@ int main(){
     if(n!=100){
         for (int i = 0; i <1000001 ; ++i) {
             bool check = false;
-            if(broken_button.size()!=0){
                 for (int j = 0; j <broken_button.size(); ++j) {
                     if ( to_string(i).find(broken_button[j]) == string::npos){
                     }else{
                         check=true;
                     }
                 }
-            }
             if(check==false){
                 int tmp = (abs(n-i)+to_string(i).length());
                 minimum = min(minimum, tmp);
-
             }
         }
         cout << minimum <<"\n";
