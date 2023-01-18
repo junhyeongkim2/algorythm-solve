@@ -1,57 +1,59 @@
 #include <bits/stdc++.h>
-
+#define lld long long int
 using namespace std;
 
 
-int K,N;
+int k,n;
+vector<lld>v;
 
-int li[10001];
 
-int max1=0;
+int main(){
 
-int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-    cin >> K >> N;
+    cin >> k >> n;
 
-    for (int i = 0; i < K; ++i) {
-        cin >> li[i];
-        if(max1<li[i]) max1= li[i];
+
+
+    lld maxv=0;
+    for (int i = 0; i <k ; ++i) {
+        lld a;
+        cin >> a;
+        v.push_back(a);
+        maxv = max(maxv,a);
     }
 
-    long long low = 1;
-    long long high = max1;
-    int ans = 0 ;
 
+    lld left =1;
+    lld right = maxv;
+    lld ans =0;
 
-    while(low<=high){
-        long long mid = (low + high)/2;
-        int cnt = 0;
+    while(left<=right){
+        lld mid = (left+right)/2;
+        lld sum=0;
 
-        for (int i = 0; i <K ; ++i) {
-            cnt += li[i] / mid;
+        for (int i = 0; i <v.size() ; ++i) {
+            sum+= v[i]/mid;
+        }
+        
+        if(sum >= n){
+            left = mid+1;
+            ans = max(ans,mid);
+        }else if(sum < n){
+            right = mid-1;
         }
 
-        if(cnt >= N){
-            low = mid +1;
-            if(ans<mid)ans = mid;
-        }else{
-            high = mid-1;
-        }
 
     }
+
     cout << ans <<"\n";
 
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
