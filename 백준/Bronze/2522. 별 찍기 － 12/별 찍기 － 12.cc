@@ -1,51 +1,41 @@
-#include <iostream>
-
-int N;
-
+#include <bits/stdc++.h>
+#define lld long long int
 using namespace std;
 
+
+
 int main(){
-    cin >> N;
 
-    int c1=0;
-    int c2=0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-    c1 = N-1;
-    c2=1;
+    int n;
 
-    for(int i = 0 ; i< N-1;i++){
-        for(int i1=0;i1<c1;i1++){
-            cout << " ";
+    cin >> n;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j <n-(i+1) ; ++j) {
+            cout <<" ";
         }
-        for(int i2=0;i2<c2;i2++){
-            cout <<  "*";
+        for (int j = 0; j <=i ; ++j) {
+            cout <<"*";
         }
-        c1--;
-        c2++;
         cout << "\n";
     }
 
-    for(int i=0;i<c2;i++){
-        cout <<"*";
-    }
-    cout << "\n";
-
-    c2-=1;
-    c1=1;
-
-    for(int i = 0 ; i< N-1;i++){
-        for(int i1=0;i1<c1;i1++){
-            cout << " ";
+    for (int i = 0; i <n-1 ; ++i) {
+        for (int j = 0; j <=i ; ++j) {
+            cout <<" ";
         }
-        for(int i2=0;i2<c2;i2++){
-            cout <<  "*";
+        for (int j = 0; j <n-(i+1) ; ++j) {
+            cout << "*";
         }
-        c1++;
-        c2-=1;
-        cout << "\n";
+        cout <<"\n";
+
+
+
     }
-
-
 
 
 
