@@ -1,47 +1,60 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 
-vector<long long>tree;
 
-long long  N , M ;
-
+int n,m;
 
 int main(){
 
-    cin >> N >> M;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-    for(int i = 0 ; i < N;i++){
-        int a= 0;
+    cin >> n >> m;
+    vector<int>tree;
+
+    int maxtree=0;
+
+    for (int i = 0; i <n ; ++i) {
+        int a;
         cin >> a;
         tree.push_back(a);
+        maxtree = max(maxtree,a);
     }
 
-    std::sort(tree.begin(), tree.end());
+    long long int low = 1;
+    long long int high = maxtree;
 
-    long long left = 0;
-    long long right = tree[tree.size()-1];
-    long long mid = 0;
-    long long  sum = 0;
-    long long ans = 0;
-    while(left<=right){
-        mid = (left+right)/2;
-        sum=0;
-        for(int i = 0 ; i <N;i++){
-            if(tree[i]>mid){
-                sum += tree[i] - mid;
+    long long int ans =0;
+
+    while(low<=high){
+        long long int mid = (low+high)/2;
+        long long int remainder = 0;
+
+        for (int i = 0; i <tree.size(); ++i) {
+            if(tree[i] >= mid){
+                remainder += (tree[i] - mid);
             }
         }
-       if (sum>=M){
-            ans=mid;
-            left = mid+1;
+
+        if(remainder >= m ){
+            ans = max(ans,mid);
+            low = mid+1;
         }else{
-            right = mid-1;
+            high = mid-1;
         }
+
+
     }
-    cout << ans;
+
+    cout << ans <<"\n";
+
+
+
+
+
+
+
+
 }
-
-
