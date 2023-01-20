@@ -1,64 +1,70 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
-const int MAX = 25;
-int N;
-int map[MAX][MAX] = { 0, };
-bool visited[MAX][MAX] = { 0, };
-int dy[] = { 0,0,1,-1 };
-int dx[] = { 1,-1,0,0 };
-int label = 1;
-vector<int> v;
-int house = 0;
+int n;
+int graph[26][26];
+int visited[26][26];
 
-void DFS(int y, int x) {
-    visited[y][x] = true;
-    house++;
+int dx[4] = {0,1,0,-1};
+int dy[4] = {1,0,-1,0};
 
-    for (int i = 0; i < 4; i++) {
-        int nx = x + dx[i];
-        int ny = y + dy[i];
 
-        if (nx < 0 || ny < 0 || nx >= N || ny >= N)
-            continue;
 
-        if (map[ny][nx] == 1 && visited[ny][nx] == 0) {
-            DFS(ny, nx);
+int bfs(int x, int y){
+    queue<pair<int,int>>q;
+    q.push({x,y});
+    int b=0;
+    visited[x][y]=1;
+    while(!q.empty()){
+        int cx = q.front().first;
+        int cy = q.front().second;
+        b++;
+        q.pop();
+        for (int i = 0; i < 4 ; ++i) {
+            int nx = cx + dx[i];
+            int ny = cy + dy[i];
+            if(nx>=0&&ny>=0&&nx<n&&ny<n&&visited[nx][ny]==0&&graph[nx][ny]==1){
+                q.push({nx,ny});
+                visited[nx][ny]=1;
+            }
         }
     }
+    return b;
 }
 
-int main() {
-    cin >> N;
 
-    for (int i = 0; i < N; i++) {
-        string input;
-        cin >> input;
 
-        for (int j = 0; j < N; j++) {
-            map[i][j] = input.at(j) - '0';
+int main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cin >> n;
+
+    for (int i = 0; i <n ; ++i) {
+        string s;
+        cin >> s;
+        for (int j = 0; j <n ; ++j) {
+            graph[i][j] = s[j]-'0';
         }
     }
 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            if (map[i][j] == 1 && visited[i][j] == 0) {
-                DFS(i, j);
-                label++;
-                v.push_back(house);
-                house = 0;
+
+    vector<int>v;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j <n; ++j) {
+            if(visited[i][j]==0&&graph[i][j]==1){
+                v.push_back(bfs(i,j));
             }
         }
     }
 
-    sort(v.begin(), v.end());
-
-    cout << label-1 << endl;
-    for (int i = 0; i < v.size(); i++) {
-        cout << v[i] << endl;
+    cout << v.size()<<"\n";
+    std::sort(v.begin(), v.end());
+    for (int i = 0; i <v.size() ; ++i) {
+        cout << v[i] <<"\n";
     }
 
 }
