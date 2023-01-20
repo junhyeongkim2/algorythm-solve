@@ -1,29 +1,25 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <string.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int dx[8] = {1,-1,0,0,-1,1,-1,1};
-int dy[8] = {0,0,-1,1,1,1,-1,-1};
-int w,h;
-int map[50][50];
-int visited[50][50];
-queue<pair<int,int>>q;
 
-int c=0;
+int graph[51][51];
+int visited[51][51];
+int w,h;
+
+
+int dx[8] = {0,1,0,-1,1,-1,1,-1};
+int dy[8] = {1,0,-1,0,1,1,-1,-1};
 
 void dfs(int y, int x){
+
     visited[y][x]=1;
-    for(int i = 0 ; i <8;i++){
-        int nx = x+dx[i];
-        int ny = y+dy[i];
-        if(nx>=0&&ny>=0&&nx<w&&ny<h) {
-            if(visited[ny][nx]==0&&map[ny][nx]==1){
-                dfs(ny,nx);
-                c++ ;
-                //cout << c <<"\n";
-            }
+    //cout << x << " " << y << "\n";
+
+    for (int i = 0; i <8; ++i) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if(visited[ny][nx]==0&&graph[ny][nx]==1&&nx>=0&&ny>=0&&nx<w&&ny<h){
+            dfs(ny,nx);
         }
     }
 }
@@ -32,38 +28,40 @@ void dfs(int y, int x){
 
 int main(){
 
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     while(true){
         cin >> w >> h;
-        if(w==0 && h==0){
+
+        if(w==0&&h==0){
             break;
         }
-        memset(map,0,sizeof map);
-        memset(visited,0,sizeof visited);
 
-
-        for(int i = 0 ; i < h;i++){
-            for(int j = 0 ; j<w;j++){
-                int a = 0;
-                cin >> a;
-                map[i][j] = a;
-                //cout << a <<" ";
+        for (int i = 0; i < h; ++i) {
+            for (int j = 0; j <w; ++j) {
+                cin >> graph[i][j];
             }
-            //cout << "\n";
         }
-        int answer=0;
 
-        for(int i = 0 ; i < h;i++){
-            for(int j = 0 ; j <w;j++){
-                if(map[i][j]==1&&visited[i][j]==0){
+        int cnt=0;
+        for (int i = 0; i <h ; ++i) {
+            for (int j = 0; j <w; ++j) {
+                if(visited[i][j]==0&&graph[i][j]==1){
                     dfs(i,j);
-                    answer++;
+                    cnt++;
                 }
             }
         }
-        cout << answer << "\n";
+
+
+        cout << cnt <<"\n";
+        memset(visited,0,sizeof visited);
+        memset(graph,0,sizeof graph);
+
 
     }
-
 
 
 
