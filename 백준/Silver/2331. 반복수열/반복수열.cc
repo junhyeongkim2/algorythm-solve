@@ -16,7 +16,7 @@ int main(){
     string temp = a;
     vector<string>v;
 
-    int visited[300001]={0,};
+    int visited[250001]={0,};
     v.push_back(a);
     visited[stoi(a)]++;
 
@@ -40,7 +40,7 @@ int main(){
 
 
     int ans =0;
-    for (int i = 0; i <300001 ; ++i) {
+    for (int i = 0; i <250001 ; ++i) {
         if(visited[i]==1){
             ans++;
         }
