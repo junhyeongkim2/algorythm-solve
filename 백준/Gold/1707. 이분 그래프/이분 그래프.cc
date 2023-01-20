@@ -1,30 +1,25 @@
-#include <iostream>
-#include <vector>
-#include <cstring>
-
+#include <bits/stdc++.h>
+#define RED 1
+#define BLUE 2
 using namespace std;
 
+int k;
+int v,e;
 
-int K;
-int V , E;
-
-vector<int>v1[20001];
 
 int visited[20001];
+vector<int>graph[20001];
 
+void dfs(int x){
 
-void dfs(int x) {
-
-    if (!visited[x]) {
-        visited[x] = 1;
-    }
-    for (int i = 0; i < v1[x].size(); i++) {
-        int next = v1[x][i];
-        if (!visited[next]) {
-            if (visited[x] == 1) {
-                visited[next] = 2;
-            } else if (visited[x] == 2) {
-                visited[next] = 1;
+    if(visited[x]==0) visited[x]= 1;
+    for (int i = 0; i <graph[x].size() ; ++i) {
+        int next = graph[x][i];
+        if(!visited[next]){
+            if(visited[x]==RED){
+                visited[next]=BLUE;
+            }else{
+                visited[next]=RED;
             }
             dfs(next);
         }
@@ -32,10 +27,10 @@ void dfs(int x) {
 }
 
 int check(){
-    for(int i =1 ; i <= V;i++){
-        for(int i1 =0;i1<v1[i].size();i1++){
-            int next = v1[i][i1];
-            if (visited[i]== visited[next]){
+    for (int i = 1; i <= v; ++i) {
+        for (int j = 0; j <graph[i].size() ; ++j) {
+            int next = graph[i][j];
+            if(visited[i] == visited[next]){
                 return 0;
             }
         }
@@ -45,35 +40,39 @@ int check(){
 
 
 int main(){
-    cin >> K;
-    while(K--) {
-        cin >> V >> E;
-        for (int i = 0; i < E; i++) {
-            int u, v;
-            cin >> u >> v;
-            v1[u].push_back(v);
-            v1[v].push_back(u);
-        }
-        dfs(1);
 
-        for(int i=1;i<=V;i++){
-            if(!visited[i]){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cin >> k;
+
+    while(k--){
+        cin >> v >> e;
+
+        for (int i = 0; i <e ; ++i) {
+            int a,b;
+            cin >> a >> b;
+            graph[a].push_back(b);
+            graph[b].push_back(a);
+        }
+        for (int i = 1; i <=v ; ++i) {
+            if(visited[i]==0){
                 dfs(i);
             }
         }
 
 
         if(check()){
-            cout << "YES"<<"\n";
+            cout << "YES"<< "\n";
         }else{
-            cout << "NO"<<"\n";
+            cout << "NO" << "\n";
         }
+
         memset(visited,0,sizeof visited);
-        for(int i=0;i<=V;i++){
-            v1[i].clear();
+        for (int i = 0; i <=v ; ++i) {
+            graph[i].clear();
         }
-
-
     }
-
+    
 }
