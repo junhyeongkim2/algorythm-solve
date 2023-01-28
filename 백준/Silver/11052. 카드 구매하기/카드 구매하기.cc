@@ -1,29 +1,40 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-const int MAX = 1001;
-
-int dp[MAX];
-int cards[MAX];
-
 int main(){
-    
-    int n ;
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int n;
     cin >> n;
-    
-    for(int i=1;i<=n;i++){
-        cin >> cards[i];
+
+    int dp[1001]={0,};
+    int card[1001];
+
+    for (int i = 1; i <=n ; ++i) {
+        cin >> card[i];
+        dp[i] = card[i];
     }
-    
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=i;j++){
-            dp[i] = max(dp[i],dp[i-j]+cards[j]);
+
+
+    for (int i = 1; i <=n ; ++i) {
+        for (int j = 1; j <=i ; ++j) {
+            dp[i] = max(dp[i], dp[i-j]+dp[j] );
         }
     }
-    cout << dp[n] << endl;
-    
-    
-    
-    
+
+
+    cout << dp[n];
+
+
+
+
+
+
+
+
+
+
 }
