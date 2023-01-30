@@ -1,56 +1,54 @@
 #include <iostream>
-#include <string.h>
+#include <cstring> //memset
 
 using namespace std;
+const int MAX = 100000 + 1;
+int N, cnt;
+int want[MAX];
+bool visited[MAX];
+bool done[MAX]; //방문이 끝났는지 여부
 
-int visited[100001];
-int graph[100001];
-int done[100001];
-int cnt=0;
-void dfs(int start){
 
-    visited[start]=1;
-    int next = graph[start];
+void dfs(int x){
 
-    if(visited[next]==0){
+    visited[x]=true;
+
+    int next = want[x];
+
+    if(!visited[next]){
         dfs(next);
-    }else{
-        if(done[next]==0){
-            for(int i =next;i!=start;i=graph[i]){
-                cnt++;
-            }
+    }else if(!done[next]){
+        for (int i = next; i !=x  ; i=want[i]) {
             cnt++;
         }
+        cnt++;
     }
-    done[start]=1;
+    done[x] = true;
 }
 
+int main(void){
 
-int main(){
     int T;
-    int n;
-
     cin >> T;
+
     while(T--){
-        cin >> n;
-
         memset(visited,0,sizeof visited);
-        memset(graph,0,sizeof graph);
         memset(done,0,sizeof done);
+        cin >> N;
+        for (int i = 1; i <=N ; ++i) {
+            cin >> want[i];
+        }
+        cnt = 0;
 
-        for(int i = 1 ; i <= n ; i++){
-            cin >> graph[i];
+        for (int i = 1; i <=N ; ++i) {
+            if(!visited[i])
+                dfs(i);
         }
 
-        for(int i = 1;i<=n;i++){
-            dfs(i);
-        }
-        cout << n-cnt<<"\n";
-        cnt=0;
-
-
+        cout << N-cnt << "\n";
 
     }
+    return 0;
 
 
 
