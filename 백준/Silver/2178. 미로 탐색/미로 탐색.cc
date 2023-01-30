@@ -1,53 +1,70 @@
-#include <queue>
-#include <iostream>
+#import <bits/stdc++.h>
 
-#define MAX 101
 using namespace std;
-int N , M ;
-int maze[MAX][MAX];
-int dist[MAX][MAX];
-int visited[MAX][MAX];
 
-int x_dir[4]={-1,1,0,0};
-int y_dir[4]={0,0,-1,1};
+int N,M;
 
-queue<pair<int,int>>q;
+int graph[101][101];
+int visited[101][101];
 
-void dfs(int x_start,int y_start){
-    q.push(make_pair(x_start,y_start));
-    visited[x_start][y_start]=1;
-    dist[x_start][y_start]++;
+int dx[4]= {1,0,0,-1};
+int dy[4]= {0,-1,1,0};
+
+int bfs(){
+
+    queue<pair<pair<int,int>,int>>q;
+    q.push({{0,0},1});
+    int sum = 0;
+    bool flag = false;
+
+    visited[0][0]=1;
 
     while(!q.empty()){
-        int x = q.front().first;
-        int y = q.front().second;
+        int y = q.front().first.first;
+        int x = q.front().first.second;
+        sum = q.front().second;
         q.pop();
-        for(int i = 0; i < 4; i++){
-            int x_new = x + x_dir[i];
-            int y_new = y+ y_dir[i];
-            if((0<=x_new&&x_new<N) && (0<=y_new&&y_new<M)
-            &&!visited[x_new][y_new]&&maze[x_new][y_new]==1){
-                q.push(make_pair(x_new,y_new));
-                visited[x_new][y_new]=1;
-                dist[x_new][y_new] = dist[x][y]+1;
-                //cout << dist[x][y]+1<<"\n";
+        for(int i = 0 ; i < 4 ; i ++){
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if(visited[ny][nx] == 0 && graph[ny][nx] == 1 && ny>=0&&nx>=0&&ny<N&&nx<M){
+
+                q.push({{ny,nx},sum+1});
+                visited[ny][nx]=1;
+                if(ny == N-1 && nx == M-1){
+                    sum+=1;
+                    flag = true;
+                    break;
+                }
+
+
+
+
             }
         }
+        if(flag)break;
     }
+
+    return sum;
+
 }
 
 
-int main(){
+int main(void){
+
     cin >> N >> M;
 
-    for(int i=0;i<N;i++){
-        string row;
-        cin >> row;
-        for(int j=0;j<M;j++){
-            maze[i][j] = row[j]-'0';
+
+    for(int i = 0 ; i < N; i ++){
+        string s;
+        cin >> s;
+        for(int j = 0 ; j < M; j++){
+            graph[i][j] = s[j]-'0';
         }
     }
 
-    dfs(0,0);
-    cout << dist[N-1][M-1];
+    cout << bfs();
+
+
+
 }
