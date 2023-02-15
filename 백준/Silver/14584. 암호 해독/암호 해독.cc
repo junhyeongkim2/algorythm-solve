@@ -17,7 +17,7 @@ int main() {
         v.push_back(a);
     }
 
-    for(int j = 0 ; j < 25; j ++){
+    for(int j = 0 ; j < 26; j ++){
         string temp;
         for(int i = 0 ; i < s.size(); i++){
             if ( s[i] + j >  122  ){
