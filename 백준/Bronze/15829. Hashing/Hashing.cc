@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+#define MOD 1234567891
 using namespace std;
 
 int main()
@@ -16,13 +16,18 @@ int main()
 //    cout << 'a'-'a' << "\n";
 //    cout << ('z'-'a')+1 << "\n";
 
-    int ans = 0;
+
+    long long sum = 0;
+    long long R = 1;
 
     for(int i = 0 ; i < n ; i ++ ){
 
-        ans += ((s[i]-'a'+1) *  (int)pow(31,i) ) ;
+        sum = (sum + (s[i]-'a'+1) * R ) % MOD;
+        R = (31 *R)%MOD;
+
+
     }
-    cout << ans ;
+    cout << sum;
 
 
 
