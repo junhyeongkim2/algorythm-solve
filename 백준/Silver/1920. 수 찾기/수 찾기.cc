@@ -1,37 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int n ;
+int m ;
+map<int, int> ms;
 
-map<long long ,long long>m1;
 
+int main(){
 
-
-int main() {
-
-    ios::sync_with_stdio(false);
+    ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n ;
     cin >> n;
 
-    for (int i = 0; i <n ; ++i) {
-        long long a;
+    for(int i = 0 ; i < n; i++){
+        int a;
         cin >> a;
-        m1[a]++;
+        ms[a] = 1;
     }
 
-    int n2;
-    cin >> n2;
 
-    for (int i = 0; i < n2; ++i) {
-        long long b;
-        cin >> b;
-        if(m1[b]>0){
-            cout << 1 <<"\n";
+    cin >> m;
+
+    for(int i = 0 ; i < m ; i ++){
+        int a;
+        cin >> a;
+
+        if( ms[a] !=0){
+            cout << 1 << "\n";
         }else{
-            cout << 0 <<"\n";
+            cout <<  0 << "\n";
         }
+
     }
 
 
@@ -40,7 +41,3 @@ int main() {
 
 
 }
-
-
-
-
