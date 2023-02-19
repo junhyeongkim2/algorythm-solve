@@ -1,36 +1,39 @@
-#include <iostream>
-#define MAX 9
+#include <bits/stdc++.h>
 using namespace std;
 
-int n,m;
-int arr[MAX] ;
-bool visited[MAX] ;
 
-void dfs(int cnt)
-{
-    if(cnt == m)
-    {
-        for(int i = 0; i < m; i++)
-            cout << arr[i] << ' ';
-        cout << '\n';
-        
+int n,m;
+
+
+void back(int now, int depth, vector<int> a){
+
+    if(a.size()==m){
+        for(auto x : a){
+            cout << x << " ";
+        }
+        cout << "\n";
         return;
     }
-    for(int i = 1; i <= n; i++)
-    {
-        
-            arr[cnt] = i;
-            dfs(cnt+1);
-
-
-        
-
+    for(int i = 1 ; i <= n; i++){
+        a.push_back(i);
+        back(i,depth+1,a);
+        a.pop_back();
     }
+
 }
 
-int main() {
+
+int main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     cin >> n >> m;
 
+    vector<int>a;
 
-    dfs(0);
+    back(1,0,a);
+
+
 }
