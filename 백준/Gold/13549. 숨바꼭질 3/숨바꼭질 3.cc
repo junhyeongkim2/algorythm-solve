@@ -5,7 +5,7 @@ using namespace std;
 int n,k;
 
 int p[100001]={};
-int min_w= 1000000;
+int min_w= 100000;
 
 void shortest(){
 
@@ -53,13 +53,13 @@ int main(){
 
 
     for(int i = 0 ; i < 100001; i++){
-        p[i] = 1000000;
+        p[i] = 100000;
     }
 
     shortest();
 
     cout << min_w << "\n";
-    
+
     return 0;
 
 }
