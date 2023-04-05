@@ -15,9 +15,11 @@ int main() {
     cin.tie(NULL);
     cout.tie(NULL);
 
+
     cin >> v >> e;
 
-    for(int i = 0 ; i < e; i++){
+
+    for(int i = 0 ; i < e; i ++){
         int a,b,c;
         cin >> a >> b >> c;
         graph[a].push_back({b,c});
@@ -27,34 +29,23 @@ int main() {
     pq.push({0,1});
 
     while(!pq.empty()){
-
-        int now_weight = pq.top().first;
         int now_node = pq.top().second;
-
+        int now_weight = pq.top().first;
         pq.pop();
 
-        if(visited[now_node]) continue;
-        visited[now_node] = true;
+        if(visited[now_node]==1)continue;
 
-        ans+= now_weight;
+        ans += now_weight;
 
-        for(int i = 0 ; i < graph[now_node].size();i++){
+        for(int i = 0 ; i < graph[now_node].size(); i++){
             int next_node = graph[now_node][i].first;
             int next_weight = graph[now_node][i].second;
             pq.push({next_weight,next_node});
         }
+
+        visited[now_node]=1;
+
     }
-
     cout << ans << "\n";
-
-
-
-
-
-
-
-
-
-
 
 }
