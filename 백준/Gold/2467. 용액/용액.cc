@@ -25,7 +25,7 @@ int main() {
 
     while(left<right){
         int temp = v[left]+v[right];
-        if(abs(temp) <= res){
+        if(abs(temp) < res){
             res = abs(temp);
             ansleft = v[left];
             ansright = v[right];
