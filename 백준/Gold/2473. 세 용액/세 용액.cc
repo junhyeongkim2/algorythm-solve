@@ -19,11 +19,10 @@ int main() {
     }
 
     long long result[3];
-    long long res = 3000000001;
+    long long  res = 3000000001;
 
 
     sort(graph.begin(),graph.end());
-
 
 
     for(int i = 0 ; i < n-2; i ++){
