@@ -1,56 +1,58 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits>
 
 using namespace std;
 
+typedef pair<int, int> pii;
 
-int n,m,from,to,dis;
-vector<vector<pair<int,int>>>v;
-vector<int>mapping;
+vector<int> dijkstra(vector<vector<pii>>& graph, int start) {
+    int n = graph.size();
+    vector<int> distance(n, INT_MAX);
+    distance[start] = 0;
 
-int dijkstra(){
-    int pos,next,dis,ndis;
-    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-    mapping[1]=0;
-    pq.push({1,0});
-    while(!pq.empty()){
-        pos = pq.top().first;
-        dis = pq.top().second;
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    pq.push({0, start});
+
+    while (!pq.empty()) {
+        int dist = pq.top().first;
+        int node = pq.top().second;
         pq.pop();
 
-        for(int i = 0 ; i < v[pos].size(); i++){
-            next = v[pos][i].first;
-            ndis = v[pos][i].second;
+        if (dist > distance[node]) {
+            continue;
+        }
 
-            if(mapping[next] > mapping[pos] + ndis){
-                mapping[next] = mapping[pos]+ndis;
-                pq.push({next,ndis});
+        for (auto neighbor : graph[node]) {
+            int nextNode = neighbor.first;
+            int cost = neighbor.second;
+            int newDist = dist + cost;
+
+            if (newDist < distance[nextNode]) {
+                distance[nextNode] = newDist;
+                pq.push({newDist, nextNode});
             }
         }
     }
-    return mapping[n];
-}
 
-
-
-void input(){
-    cin >> n >> m;
-    v.resize(n+1);
-    mapping.resize(n+1,987654321);
-    for(int i = 0 ; i < m ; i ++){
-        cin >> from >> to >> dis;
-        v[from].push_back({to,dis});
-        v[to].push_back({from,dis});
-    }
+    return distance;
 }
 
 int main() {
+    int N, M;
+    cin >> N >> M;
 
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
+    vector<vector<pii>> graph(N);
+    for (int i = 0; i < M; i++) {
+        int A, B, C;
+        cin >> A >> B >> C;
+        graph[A - 1].push_back({B - 1, C});
+        graph[B - 1].push_back({A - 1, C});
+    }
 
-    input();
+    vector<int> distances = dijkstra(graph, 0);
+    cout << distances[N - 1] << endl;
 
-    cout << dijkstra() << "\n";
-
+    return 0;
 }
