@@ -33,7 +33,7 @@ int bfs(int row, int col, vector<string> &graph){
             if(next_r>=0&&next_r<r&&next_c>=0&&next_c<c){
                 if(graph[next_r][next_c]=='1'&&block){
                     q.push({{next_r,next_c},0});
-                    visited[next_r][next_c][block-1] = visited[current_r][current_c][block] + 1;
+                    visited[next_r][next_c][0] = visited[current_r][current_c][1] + 1;
                 }else if(graph[next_r][next_c]=='0' && visited[next_r][next_c][block]==0){
                     q.push({{next_r,next_c},block});
                     visited[next_r][next_c][block] = visited[current_r][current_c][block] + 1;
