@@ -3,8 +3,8 @@ using namespace std;
 
 
 int n;
-unsigned long long res;
-bool visited[100001];
+long long int res;
+int visited[100001];
 
 
 int main() {
@@ -12,13 +12,13 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    
+
     cin >> n;
     vector<int>arr(n);
 
     for(int i =0; i < n ;i++){cin >> arr[i];}
 
-    int start=0; int end = 0;
+    int end = 0;
     for(int start = 0 ; start < n ; start++){
         while(end < n){
             if(visited[arr[end]])break;
