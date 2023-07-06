@@ -1,23 +1,35 @@
 #include<bits/stdc++.h>
-using namespace std; 
+using namespace std;
+
+
 int n;
 unsigned long long res;
-bool vis[100000+1];
-int main(){
-	cin >> n;
-	vector<int> v(n);
-	for(int i = 0; i < n; i++) cin >> v[i];
-	
-	int start=0, end=0;
-	for(int start = 0; start < n; start++) {
-		while(end < n) {
-			if(vis[v[end]]) break;
-			vis[v[end]]=1;
-			end++; 
-		}
-		res+=(end-start);
-		vis[v[start]]=0;
-	}
-	cout << res << endl;
-	return 0;
+bool visited[100001];
+
+
+int main() {
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    cin >> n;
+    vector<int>arr(n);
+
+    for(int i =0; i < n ;i++){cin >> arr[i];}
+
+    int start=0; int end = 0;
+    for(int start = 0 ; start < n ; start++){
+        while(end < n){
+            if(visited[arr[end]])break;
+            visited[arr[end]]=1;
+            end++;
+        }
+        res += (end - start);
+        visited[arr[start]]=0;
+    }
+    cout << res <<"\n";
+
+    return 0;
+
 }
