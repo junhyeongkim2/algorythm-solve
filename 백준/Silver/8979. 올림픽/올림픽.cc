@@ -18,8 +18,8 @@ int main() {
         int a,b,c,d;
         cin >> a>> b>> c>> d;
         gold[a]=b;
-        silver[a]=b;
-        bronze[a]=b;
+        silver[a]=c;
+        bronze[a]=d;
     }
 
     int res=1;
