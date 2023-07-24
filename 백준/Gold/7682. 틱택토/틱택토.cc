@@ -1,70 +1,109 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
 
-// X가 이겼는지 확인
-bool checkX(char map[3][3]){
+char m[3][3];
+string input;
 
-    for(int i = 0; i < 3; i++){
-        // 가로 체크
-        if(map[i][0] == 'X' && map[i][0] == map[i][1]
-           && map[i][1] == map[i][2]) return true;
 
-        // 세로 체크
-        if(map[0][i] == 'X' && map[0][i] == map[1][i]
-           && map[1][i] == map[2][i]) return true;
-    }
-    // 대각 체크
-    if(map[0][0] == 'X' && map[0][0] == map[1][1]
-       && map[1][1] == map[2][2]) return true;
+bool CheckXwin() {
 
-    if(map[0][2] == 'X' && map[0][2] == map[1][1]
-       && map[1][1] == map[2][0]) return true;
-
-    return false;
-}
-
-// O가 이겼는지 확인
-bool checkO(char map[3][3]){
-    for(int i = 0; i < 3; i++){
-        if(map[i][0] == 'O' && map[i][0] == map[i][1]
-           && map[i][1] == map[i][2]) return true;
-
-        if(map[0][i] == 'O' && map[0][i] == map[1][i]
-           && map[1][i] == map[2][i]) return true;
-    }
-    if(map[0][0] == 'O' && map[0][0] == map[1][1]
-       && map[1][1] == map[2][2]) return true;
-
-    if(map[0][2] == 'O' && map[0][2] == map[1][1]
-       && map[1][1] == map[2][0]) return true;
-
-    return false;
-}
-int main(){
-    string input;
-    while(true){
-        char map[3][3];
-        cin >> input;
-        if(input[0] == 'e') break;
-
-        // x와 o의 개수
-        int x = 0;
-        int o = 0;
-        for(int i = 0; i < 9; i++) {
-            // 3x3 2차원 배열로 만들기
-            map[i/3][i%3] = input[i];
-            if(input[i] == 'X') x++;
-            else if(input[i] == 'O') o++;
+    bool ret = false;
+    for(int i = 0 ; i < 3; i++){
+        if(m[i][0]=='X' && m[i][0]==m[i][1]&&m[i][1]==m[i][2]){
+            ret= true;
         }
-        bool isX = checkX(map);
-        bool isO = checkO(map);
-
-        if(isX && !isO && x == o+1) printf("valid\n"); // X가 이긴 경우
-        else if(!isX && isO && x == o) printf("valid\n"); // O가 이긴 경우
-        else if(!isX && !isO && x == 5 && o == 4) printf("valid\n"); // 가득 찬 경우
-        else printf("invalid\n"); // 위 경우에 다 포함 안될때
     }
+
+    for(int i = 0 ; i < 3; i++){
+        if(m[0][i]=='X' && m[0][i]==m[1][i]&&m[1][i]==m[2][i]){
+            ret= true;
+        }
+    }
+
+    if(m[0][0]=='X'&&m[0][0]==m[1][1]&&m[1][1]==m[2][2])
+        ret= true;
+
+    if(m[0][2]=='X'&&m[0][2]==m[1][1]&&m[1][1]==m[2][0])
+        ret= true;
+
+    return ret;
+}
+bool CheckOwin() {
+
+    bool ret = false;
+
+    for(int i = 0 ; i < 3; i++){
+        if(m[i][0]=='O' && m[i][0]==m[i][1]&&m[i][1]==m[i][2]){
+            ret = true;
+        }
+    }
+
+    for(int i = 0 ; i < 3; i++){
+        if(m[0][i]=='O' && m[0][i]==m[1][i]&&m[1][i]==m[2][i]){
+            ret= true;
+        }
+    }
+
+    if(m[0][0]=='O'&&m[0][0]==m[1][1]&&m[1][1]==m[2][2])
+        ret= true;
+
+    if(m[0][2]=='O'&&m[0][2]==m[1][1]&&m[1][1]==m[2][0])
+        ret=  true;
+
+
+    return ret;
+
+}
+
+
+int main() {
+
+    ios_base::sync_with_stdio(false);
+    cout.tie(0);
+    cin.tie(0);
+
+
+    while(true){
+        cin >> input;
+        if(input=="end"){
+            break;
+        }
+
+        int onum = 0;
+        int xnum = 0;
+        bool owin = false, xwin = false;
+
+        for(int i = 0 ; i <9; ++i){
+            m[i/3][i%3]=input[i];
+            if(input[i]=='O')
+                ++onum;
+            else if(input[i]=='X')
+                ++xnum;
+        }
+
+        owin = CheckOwin();
+        xwin = CheckXwin();
+
+
+        if(xwin&&!owin&&xnum-onum==1){
+            cout << "valid" << "\n";
+        }else if (!xwin&&owin&&xnum==onum){
+            cout << "valid" << "\n";
+        }else if(!xwin&&!owin&&xnum==5&&onum==4){
+            cout <<"valid" << "\n";
+        }else{
+            cout << "invalid" << "\n";
+        }
+
+    }
+
+
+
+
+
+
+
     return 0;
 }
+
