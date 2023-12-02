@@ -20,7 +20,7 @@ public class Main {
         n = sc.nextInt();
         m = sc.nextInt();
 
-        setting();
+        //setting();
 
         for (int i = 0; i < m; i++) {
             int a, b;
@@ -30,35 +30,31 @@ public class Main {
             graph[b][a] = -1;
         }
 
+//        for (int i = 1; i <= n; i++) {
+//            for (int j = 1; j <= n; j++){
+//                System.out.print(graph[i][j]);
+//            }
+//            System.out.println();
+//        }
+
         floyd();
 
         int s;
         s = sc.nextInt();
 
-        for(int i = 0 ; i < s; i++){
-            int a,b;
+        for (int i = 0; i < s; i++) {
+            int a, b;
             a = sc.nextInt();
             b = sc.nextInt();
 
-            if(graph[a][b] == 1) {
+            if (graph[a][b] == 1) {
                 System.out.println(-1);
-            }
-            else if(graph[a][b] == -1){
+            } else if (graph[a][b] == -1) {
                 System.out.println(1);
-            }else{
+            } else {
                 System.out.println(0);
             }
-
-
-
         }
-
-
-
-
-
-
-
     }
 
     public static void setting() {
@@ -68,23 +64,18 @@ public class Main {
     }
 
     public static void floyd() {
-
         for (int k = 1; k <= n; k++) {
             for (int i = 1; i <= n; i++) {
                 for (int j = 1; j <= n; j++) {
-                    if (graph[i][k] == 1  &&  graph[k][j] == 1) {
+                    if (graph[i][k] == 1 && graph[k][j] == 1) {
                         graph[i][j] = 1;
                     }
-                    if (graph[i][k] == -1  &&  graph[k][j] == -1) {
+                    if (graph[i][k] == -1 && graph[k][j] == -1) {
                         graph[i][j] = -1;
                     }
-
-
                 }
             }
         }
-
-
     }
 
 
