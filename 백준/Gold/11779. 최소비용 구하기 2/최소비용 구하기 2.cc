@@ -47,7 +47,7 @@ int main() {
     cin >> n >> m;
 
     for (int i = 1; i <= n; i++)
-        dist[i] = 2000000000;
+        dist[i] = 100000001;
 
     for (int i = 0; i < m; i++) {
         int a, b, c;
