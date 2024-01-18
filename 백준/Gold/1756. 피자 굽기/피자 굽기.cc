@@ -19,12 +19,12 @@ int main() {
 
     for (int i = 0; i < d; i++) {
         cin >> oven[i];
-//
-//        if (oven[i] > tempOven) {
-//            oven[i] = tempOven;
-//        }
 
-        if (i > 0 && oven[i - 1] < oven[i]) oven[i] = oven[i - 1];
+        if (oven[i] > tempOven && i > 0) {
+            oven[i] = tempOven;
+
+        }
+        tempOven = oven[i];
 
     }
 
@@ -38,18 +38,18 @@ int main() {
 
     for (int i = d - 1; i >= 0; i--) {
 
-        if (oven[i] >= pizza[cnt]){
-            pizzaTopIndex = i+1;
+        if (oven[i] >= pizza[cnt]) {
+            pizzaTopIndex = i + 1;
             cnt++;
         }
-        if(cnt == n){
+        if (cnt == n) {
             break;
         }
     }
 
-    if(cnt == n){
+    if (cnt == n) {
         cout << pizzaTopIndex << "\n";
-    }else{
+    } else {
         cout << 0 << "\n";
     }
 
