@@ -44,7 +44,7 @@ int main() {
 
 //            cout << tempS << " / 1 " << visitCount << "\n";
 
-        } else if (visitCount > 2) {
+        } else if (visitCount > n) {
             m[s[left]]--;
             if (m[s[left]] == 0) {
                 visitCount--;
