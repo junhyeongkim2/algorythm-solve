@@ -27,6 +27,7 @@ int main() {
             ans = max(ans, (ll)S.top().h * (n - S.top().idx));
             S.pop();
         }
+        
         cout << ans << '\n';
     }
 }
