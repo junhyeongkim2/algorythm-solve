@@ -11,8 +11,8 @@ int main() {
     long long min, max;
     cin >> min >> max;
 
-    for (long long i = min; i <= max; i++) {
-        num[i - min] = i;
+    for (long long i = 0; i <= max - min; i++) {
+        num[i] = 1;
     }
 
     for (long long i = 2; i * i <= max; i++) {
@@ -28,7 +28,7 @@ int main() {
     }
 
     int ans = 0;
-    for (long long i = 0; i <= max-min; i++) {
+    for (long long i = 0; i <= max - min; i++) {
         if (num[i] != 0) {
             ans++;
         }
