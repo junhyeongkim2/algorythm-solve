@@ -28,8 +28,8 @@ int main() {
     }
 
     int ans = 0;
-    for (long long i = min; i <= max; i++) {
-        if (num[i - min] != 0) {
+    for (long long i = 0; i <= max-min; i++) {
+        if (num[i] != 0) {
             ans++;
         }
     }
