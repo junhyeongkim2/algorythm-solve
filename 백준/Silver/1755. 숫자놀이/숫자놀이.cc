@@ -7,6 +7,94 @@ int m;
 
 vector<pair<string, int>> v;
 
+
+string judgeZero(char c) {
+    if (c == '0') {
+        return "zero";
+    }
+    return "";
+}
+
+string judgeOne(char c) {
+    if (c == '1') {
+        return "one";
+    }
+    return "";
+}
+
+string judgeTwo(char c) {
+    if (c == '2') {
+        return "two";
+    }
+    return "";
+}
+
+string judgeThree(char c) {
+    if (c == '3') {
+        return "three";
+    }
+    return "";
+}
+
+string judgeFour(char c) {
+    if (c == '4') {
+        return "four";
+    }
+    return "";
+}
+
+string judgeFive(char c) {
+    if (c == '5') {
+        return "five";
+    }
+    return "";
+}
+
+string judgeSix(char c) {
+    if (c == '6') {
+        return "six";
+    }
+    return "";
+}
+
+string judgeSeven(char c) {
+    if (c == '7') {
+        return "seven";
+    }
+    return "";
+}
+
+string judgeEight(char c) {
+    if (c == '8') {
+        return "eight";
+    }
+    return "";
+}
+
+string judgeNine(char c) {
+    if (c == '9') {
+        return "nine";
+    }
+    return "";
+}
+
+
+string judgeNumber(char c) {
+    string s = "";
+    s += judgeZero(c);
+    s += judgeOne(c);
+    s += judgeTwo(c);
+    s += judgeThree(c);
+    s += judgeFour(c);
+    s += judgeFive(c);
+    s += judgeSix(c);
+    s += judgeSeven(c);
+    s += judgeEight(c);
+    s += judgeNine(c);
+    return s;
+}
+
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
@@ -16,114 +104,17 @@ int main() {
     for (int i = n; i <= m; i++) {
 
         if (i < 10) {
-
-            if (i == 1) {
-                v.push_back({"one", i});
-            }
-
-            if (i == 2) {
-                v.push_back({"two", i});
-            }
-            if (i == 3) {
-                v.push_back({"three", i});
-            }
-            if (i == 4) {
-                v.push_back({"four", i});
-            }
-            if (i == 5) {
-                v.push_back({"five", i});
-            }
-            if (i == 6) {
-                v.push_back({"six", i});
-            }
-            if (i == 7) {
-                v.push_back({"seven", i});
-            }
-            if (i == 8) {
-                v.push_back({"eight", i});
-            }
-            if (i == 9) {
-                v.push_back({"nine", i});
-            }
+            v.push_back({judgeNumber(i+'0'),i});
         }
 
         if (i >= 10) {
             string iString = to_string(i);
             string s;
 
-            if (iString[0] == '1') {
-                s += "one";
-            }
-
-            if (iString[0] == '2') {
-                s += "two";
-            }
-
-            if (iString[0] == '3') {
-                s += "three";
-            }
-
-            if (iString[0] == '4') {
-                s += "four";
-            }
-
-            if (iString[0] == '5') {
-                s += "five";
-            }
-
-            if (iString[0] == '6') {
-                s += "six";
-            }
-
-            if (iString[0] == '7') {
-                s += "seven";
-            }
-            if (iString[0] == '8') {
-                s += "eight";
-            }
-            if (iString[0] == '9') {
-                s += "nine";
-            }
-
+            s+= judgeNumber(iString[0]);
             s += " ";
+            s+= judgeNumber(iString[1]);
 
-            if (iString[1] == '0') {
-                s += "zero";
-            }
-
-            if (iString[1] == '1') {
-                s += "one";
-            }
-
-            if (iString[1] == '2') {
-                s += "two";
-            }
-
-            if (iString[1] == '3') {
-                s += "three";
-            }
-
-            if (iString[1] == '4') {
-                s += "four";
-            }
-
-            if (iString[1] == '5') {
-                s += "five";
-            }
-
-            if (iString[1] == '6') {
-                s += "six";
-            }
-
-            if (iString[1] == '7') {
-                s += "seven";
-            }
-            if (iString[1] == '8') {
-                s += "eight";
-            }
-            if (iString[1] == '9') {
-                s += "nine";
-            }
             v.push_back({s, i});
         }
 
@@ -131,20 +122,17 @@ int main() {
     }
 
 
-    sort(v.begin(),v.end());
+    sort(v.begin(), v.end());
 
     int cnt = 0;
-    for(auto x : v){
+    for (auto x: v) {
         cout << x.second << " ";
         cnt++;
-        if(cnt>=10){
+        if (cnt >= 10) {
             cout << "\n";
-            cnt=0;
+            cnt = 0;
         }
     }
-
-
-
 
 
 }
