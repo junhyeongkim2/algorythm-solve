@@ -11,6 +11,8 @@ int solution(string t, string p) {
     int answer = 0;
     
     
+    
+    
     for(int i = 0 ; i <= t.length() - p.length(); i++){
         string temp = t.substr(i,p.length());        
         unsigned long long intTemp = stoull(temp);
@@ -18,9 +20,7 @@ int solution(string t, string p) {
         if(intTemp <= intP){
             answer++;
         }
-        
-        cout << intTemp << " " << intP << "\n";
-                        
+                                
     }
     
     return answer;
