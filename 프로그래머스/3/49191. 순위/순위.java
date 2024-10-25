@@ -19,15 +19,17 @@ class Solution {
             for (int i = 1; i <= n; i++) {
                 for (int j = 1; j <= n; j++) {
                                         
-                    if(dist[k][j] == 1 && dist[j][i] == 1){
-                        dist[k][i] = 1;
-                        dist[i][k] = -1;
+                    if(dist[i][k] == 1 && dist[k][j] == 1){
+                        dist[i][j] = 1;
+                        dist[j][i] = -1;
                     }
                     
-                    if(dist[k][j] == -1 && dist[j][i] == -1){
-                        dist[k][i] = -1;
-                        dist[i][k] = 1;
+                    if(dist[i][k] == -1 && dist[k][j] == -1){
+                        dist[i][j] = -1;
+                        dist[j][i] = 1;
                     }
+                    
+                    
                     
                     
                 }
