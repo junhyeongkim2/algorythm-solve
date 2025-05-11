@@ -34,7 +34,7 @@ class Solution {
         //반복해서 최종적으로 가능한 친구들의 수를 계산한다.
         
         int start = 1;
-        int end = 200000001;
+        int end = 200000000;
         int answer = 0;
         
         while(start <= end){
