@@ -1,126 +1,82 @@
 import java.util.*;
 
 class Solution {
-    
-    static class Robot {
-        int r1, c1, r2, c2, time;
-        
-        Robot(int r1, int c1, int r2, int c2, int time) {
-            this.r1 = r1;
-            this.c1 = c1;
-            this.r2 = r2;
-            this.c2 = c2;
-            this.time = time;
-        }
-        
-        String getKey() {
-            return r1 + "," + c1 + "," + r2 + "," + c2;
-        }
-    }
-    
     public int solution(int[][] board) {
         int N = board.length;
+        Queue<int[]> q = new LinkedList<>();
+        boolean[][][] visited = new boolean[N][N][2];  // [행][열][방향] (0=가로, 1=세로)
         
-        Queue<Robot> q = new LinkedList<>();
-        Set<String> visited = new HashSet<>();
-        
-        // 시작: (0,0), (0,1)
-        q.offer(new Robot(0, 0, 0, 1, 0));
-        visited.add("0,0,0,1");
-        
-        int[] dr = {-1, 1, 0, 0};
-        int[] dc = {0, 0, -1, 1};
+        q.offer(new int[]{0, 0, 0, 0});  // r, c, dir, time
+        visited[0][0][0] = true;
         
         while(!q.isEmpty()) {
-            Robot cur = q.poll();
+            int[] cur = q.poll();
+            int r = cur[0], c = cur[1], dir = cur[2], time = cur[3];
             
-            // 목적지 도착
-            if((cur.r1 == N-1 && cur.c1 == N-1) || (cur.r2 == N-1 && cur.c2 == N-1)) {
-                return cur.time;
+            // 도착 체크
+            if((dir == 0 && (c == N-1 || c+1 == N-1) && r == N-1) ||
+               (dir == 1 && (r == N-1 || r+1 == N-1) && c == N-1)) {
+                return time;
             }
             
             // 1. 상하좌우 이동
-            for(int i = 0; i < 4; i++) {
-                int nr1 = cur.r1 + dr[i];
-                int nc1 = cur.c1 + dc[i];
-                int nr2 = cur.r2 + dr[i];
-                int nc2 = cur.c2 + dc[i];
-                
-                if(isValid(board, N, nr1, nc1) && isValid(board, N, nr2, nc2)) {
-                    String key = nr1 + "," + nc1 + "," + nr2 + "," + nc2;
-                    if(!visited.contains(key)) {
-                        visited.add(key);
-                        q.offer(new Robot(nr1, nc1, nr2, nc2, cur.time + 1));
-                    }
+            for(int[] d : new int[][]{{-1,0}, {1,0}, {0,-1}, {0,1}}) {
+                int nr = r + d[0], nc = c + d[1];
+                if(ok(board, N, nr, nc, dir) && !visited[nr][nc][dir]) {
+                    visited[nr][nc][dir] = true;
+                    q.offer(new int[]{nr, nc, dir, time + 1});
                 }
             }
             
             // 2. 회전
-            if(cur.r1 == cur.r2) {  // 가로 상태
-                int[] rotateDir = {-1, 1};  // 위, 아래
-                for(int d : rotateDir) {
-                    // (r1, c1) 축
-                    if(isValid(board, N, cur.r1 + d, cur.c1) && 
-                       isValid(board, N, cur.r2 + d, cur.c2)) {
-                        int nr = cur.r1 + d;
-                        String key = Math.min(cur.r1, nr) + "," + cur.c1 + "," + 
-                                     Math.max(cur.r1, nr) + "," + cur.c1;
-                        if(!visited.contains(key)) {
-                            visited.add(key);
-                            q.offer(new Robot(Math.min(cur.r1, nr), cur.c1, 
-                                            Math.max(cur.r1, nr), cur.c1, cur.time + 1));
+            if(dir == 0) {  // 가로 → 세로
+                for(int dr : new int[]{-1, 1}) {
+                    // 대각선 2칸 체크
+                    if(check(board, N, r+dr, c) && check(board, N, r+dr, c+1)) {
+                        // (r, c) 축 회전
+                        int nr = Math.min(r, r+dr);
+                        if(!visited[nr][c][1]) {
+                            visited[nr][c][1] = true;
+                            q.offer(new int[]{nr, c, 1, time + 1});
                         }
-                    }
-                    
-                    // (r2, c2) 축
-                    if(isValid(board, N, cur.r1 + d, cur.c1) && 
-                       isValid(board, N, cur.r2 + d, cur.c2)) {
-                        int nr = cur.r2 + d;
-                        String key = Math.min(cur.r2, nr) + "," + cur.c2 + "," + 
-                                     Math.max(cur.r2, nr) + "," + cur.c2;
-                        if(!visited.contains(key)) {
-                            visited.add(key);
-                            q.offer(new Robot(Math.min(cur.r2, nr), cur.c2, 
-                                            Math.max(cur.r2, nr), cur.c2, cur.time + 1));
+                        // (r, c+1) 축 회전
+                        if(!visited[nr][c+1][1]) {
+                            visited[nr][c+1][1] = true;
+                            q.offer(new int[]{nr, c+1, 1, time + 1});
                         }
                     }
                 }
-            } else {  // 세로 상태
-                int[] rotateDir = {-1, 1};  // 좌, 우
-                for(int d : rotateDir) {
-                    // (r1, c1) 축
-                    if(isValid(board, N, cur.r1, cur.c1 + d) && 
-                       isValid(board, N, cur.r2, cur.c2 + d)) {
-                        int nc = cur.c1 + d;
-                        String key = cur.r1 + "," + Math.min(cur.c1, nc) + "," + 
-                                     cur.r1 + "," + Math.max(cur.c1, nc);
-                        if(!visited.contains(key)) {
-                            visited.add(key);
-                            q.offer(new Robot(cur.r1, Math.min(cur.c1, nc), 
-                                            cur.r1, Math.max(cur.c1, nc), cur.time + 1));
+            } else {  // 세로 → 가로
+                for(int dc : new int[]{-1, 1}) {
+                    // 대각선 2칸 체크
+                    if(check(board, N, r, c+dc) && check(board, N, r+1, c+dc)) {
+                        // (r, c) 축 회전
+                        int nc = Math.min(c, c+dc);
+                        if(!visited[r][nc][0]) {
+                            visited[r][nc][0] = true;
+                            q.offer(new int[]{r, nc, 0, time + 1});
                         }
-                    }
-                    
-                    // (r2, c2) 축
-                    if(isValid(board, N, cur.r1, cur.c1 + d) && 
-                       isValid(board, N, cur.r2, cur.c2 + d)) {
-                        int nc = cur.c2 + d;
-                        String key = cur.r2 + "," + Math.min(cur.c2, nc) + "," + 
-                                     cur.r2 + "," + Math.max(cur.c2, nc);
-                        if(!visited.contains(key)) {
-                            visited.add(key);
-                            q.offer(new Robot(cur.r2, Math.min(cur.c2, nc), 
-                                            cur.r2, Math.max(cur.c2, nc), cur.time + 1));
+                        // (r+1, c) 축 회전
+                        if(!visited[r+1][nc][0]) {
+                            visited[r+1][nc][0] = true;
+                            q.offer(new int[]{r+1, nc, 0, time + 1});
                         }
                     }
                 }
             }
         }
-        
         return -1;
     }
     
-    boolean isValid(int[][] board, int N, int r, int c) {
-        return r >= 0 && r < N && c >= 0 && c < N && board[r][c] == 0;
+    // 이동 가능 체크 (로봇이 차지하는 2칸 모두 확인)
+    boolean ok(int[][] b, int N, int r, int c, int dir) {
+        if(!check(b, N, r, c)) return false;
+        if(dir == 0) return check(b, N, r, c+1);  // 가로: 오른쪽 칸
+        return check(b, N, r+1, c);  // 세로: 아래 칸
+    }
+    
+    // 단일 칸 체크
+    boolean check(int[][] b, int N, int r, int c) {
+        return r >= 0 && r < N && c >= 0 && c < N && b[r][c] == 0;
     }
 }
